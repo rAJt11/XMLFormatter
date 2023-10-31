@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLFileDifference", "XMLFileDifference\XMLFileDifference.csproj", "{B8370AD8-77B8-4FE4-9BF6-24F837129BB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8370AD8-77B8-4FE4-9BF6-24F837129BB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8370AD8-77B8-4FE4-9BF6-24F837129BB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8370AD8-77B8-4FE4-9BF6-24F837129BB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8370AD8-77B8-4FE4-9BF6-24F837129BB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23348C18-7A2E-4137-8CBE-1BB96000AD21}
+	EndGlobalSection
+EndGlobal

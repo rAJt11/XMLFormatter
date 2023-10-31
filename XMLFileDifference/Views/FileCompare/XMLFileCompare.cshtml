@@ -1,0 +1,171 @@
+﻿@*@model XMLFileDifference.Models.XmlDiffViewModel
+
+    <h1>XML Difference Report</h1>
+
+    <ul>
+        @foreach (var node in Model.Nodes)
+        {
+            <li>
+                @node.Match - @node.ChangeType:
+                @if (node.ChangeType == "change")
+                {
+                    <h3>Attribute:</h3> @node.AttributeName, <h3>Old:</h3> @node.OldValue, <h3>New:</h3> @node.NewValue
+                }
+                <ul>
+                    @foreach (var child in node.Children)
+                    {
+                        <li>Child Match: @child.Match</li>
+                    }
+                </ul>
+            </li>
+
+            <li>
+                @node.Match - @node.ChangeType:
+                @if (node.ChangeType == "add")
+                {
+                    <h3>Attribute:</h3> @node.AttributeName, <h3>Old:</h3>  @node.OldValue, <h3>New:</h3>  @node.NewValue
+                }
+                <ul>
+                    @foreach (var child in node.Children)
+                    {
+                        <li>Child Match: @child.Match</li>
+                    }
+                </ul>
+            </li>
+
+            <li>
+                @node.Match - @node.ChangeType:
+                @if (node.ChangeType == "delete")
+                {
+                    <h3>Attribute:</h3> @node.AttributeName, <h3>Old:</h3>  @node.OldValue, <h3>New:</h3>  @node.NewValue
+                }
+                <ul>
+                    @foreach (var child in node.Children)
+                    {
+                        <li>Child Match: @child.Match</li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>*@
+
+
+
+
+
+@*@model XMLFileDifference.Models.XmlDiffModel
+
+    <h1>XML Difference Report</h1>
+
+    <p>Version: @Model.Version</p>
+    <p>SrcDocHash: @Model.SrcDocHash</p>
+    <p>Options: @Model.Options</p>
+    <p>Fragments: @Model.Fragments</p>
+
+    @foreach (var node in Model.Nodes)
+    {
+        <div>
+            <p>Match: @node.Match</p>
+            @if (node.ChangeType == "change")
+            {
+                <p>Attribute Name: @node.AttributeName</p>
+                <p>Old Value: @node.OldValue</p>
+                <p>New Value: @node.NewValue</p>
+            }
+        </div>
+    }*@
+
+
+
+
+@*@model  List<XMLFileDifference.Models.XmlDiffNode>
+
+    @{
+        ViewBag.Title = "XML Differences";
+    }
+
+    <h2>XML Differences</h2>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Match</th>
+                    <th>Change Type</th>
+                    <th>Attribute Name</th>
+                    <th>Old Value</th>
+                    <th>New Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var node in Model)
+                {
+                    <tr>
+                        <td>@node.Match</td>
+                        <td>@node.ChangeType</td>
+                        <td>@node.AttributeName</td>
+                        <td>@node.OldValue</td>
+                        <td>@node.NewValue</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No XML differences found.</p>
+    }*@
+
+@model XMLFileDifference.Models.XmlDiffModel
+
+@{
+    ViewBag.Title = "XML Differences";
+}
+
+<h2>XML Differences</h2>
+
+<div>
+    <strong>Version:</strong> @Model.Version
+</div>
+<div>
+    <strong>SrcDocHash:</strong> @Model.SrcDocHash
+</div>
+<div>
+    <strong>Options:</strong> @Model.Options
+</div>
+<div>
+    <strong>Fragments:</strong> @Model.Fragments
+</div>
+
+@if (Model.Nodes != null && Model.Nodes.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Match</th>
+                <th>Change Type</th>
+                <th>Attribute Name</th>
+                <th>Old Value</th>
+                <th>New Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var node in Model.Nodes)
+            {
+                <tr>
+                    <td>@node.Match</td>
+                    <td>@node.ChangeType</td>
+                    <td>@node.AttributeName</td>
+                    <td>@node.OldValue</td>
+                    <td>@node.NewValue</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No XML differences found.</p>
+}
+

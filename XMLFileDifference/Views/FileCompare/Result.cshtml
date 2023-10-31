@@ -1,0 +1,54 @@
+﻿@model DiffPlex.DiffBuilder.Model.SideBySideDiffModel
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Comparison Result</title>
+        <style>
+            .deleted {
+                background-color: #ffe6e6; /* Light red for deleted lines */
+            }
+
+            .inserted {
+                background-color: #e6ffe6; /* Light green for inserted lines */
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Comparison Result</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Old Text</th>
+                    <th>New Text</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in Model.OldText.Lines)
+                {
+                    <tr>
+                        <td class="deleted">@Html.Raw(line.Text ?? string.Empty)</td>
+                        <td></td>
+                    </tr>
+                }
+
+                @for (int i = 0; i < Model.OldText.Lines.Count || i < Model.NewText.Lines.Count; i++)
+                {
+                    <tr>
+                        <td class="deleted">@Html.Raw(Model.OldText.Lines.ElementAtOrDefault(i)?.Text ?? string.Empty)</td>
+                        <td class="inserted">@Html.Raw(Model.NewText.Lines.ElementAtOrDefault(i)?.Text ?? string.Empty)</td>
+                    </tr>
+                }
+
+                @foreach (var line in Model.NewText.Lines)
+                {
+                    <tr>
+                        <td></td>
+                        <td class="inserted">@Html.Raw(line.Text ?? string.Empty)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>
+    </html>
