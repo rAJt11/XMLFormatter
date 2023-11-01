@@ -168,7 +168,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\path_to_output.html" />
     <Content Include="App_Data\XMLFile1.xml" />
     <Content Include="App_Data\XMLFile2.xml" />
     <Content Include="App_Data\XMLFileOutput.xml" />

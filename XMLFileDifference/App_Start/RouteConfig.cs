@@ -12,7 +12,7 @@ namespace XMLFileDifference
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "FileCompare", action = "XMLFileCompare", id = UrlParameter.Optional }
+                defaults: new { controller = "FileCompare", action = "CompareXML", id = UrlParameter.Optional }
             );
         }
     }

@@ -1,14 +1,490 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<catalog>
-	<book id="bk101">
-		<author>Gambardella, Matthew</author>
-		<title>XML Developer's Guide</title>
-		<genre>Computer</genre>
-		<price>44.95</price>
-		<publish_date>2000-10-01</publish_date>
-		<description>
-			An in-depth look at creating applications
-			with XML.
-		</description>
-	</book>
-</catalog>
+<application id="1">
+	<template name="xyz" xmlns:json='http://james.newtonking.com/projects/json' >
+		<tag name='SalesOrganization'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].hierarchy.salesChannelName</BEN_source_key>
+			</rules>
+		</tag>
+
+		<tag name='chainId'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].hierarchy.salesOrganizationCode</BEN_source_key>
+			</rules>
+		</tag>
+
+		<tag name='receipt_header_line_5'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.primaryContact.phoneNumber</BEN_source_key>
+			</rules>
+		</tag>
+
+		<tag name='TimeZone'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.physicalAddress.timeZone</BEN_source_key>
+			</rules>
+		</tag>
+		<tag name='debit_enable'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminal[0].terminalProductCategory.debit</BEN_source_key>
+			</rules>
+		</tag>
+
+		<tag name='gift_enabled'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminal[0].terminalProductCategory.gift</BEN_source_key>
+			</rules>
+		</tag>
+
+		<tag name='cashback_limit'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName == 'CASH_BACK_LIMIT')].rawValue</BEN_source_key>
+			</rules>
+		</tag>
+
+		<tag name='first_gratuity_percentage'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName == 'SUG_TIP_AMOUNT_1')].rawValue</BEN_source_key>
+			</rules>
+		</tag>
+
+		<tag name='second_gratuity_percentage'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName == 'SUG_TIP_AMOUNT_2')].rawValue</BEN_source_key>
+			</rules>
+		</tag>
+		<tag name='third_gratuity_percentage'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName == 'SUG_TIP_AMOUNT_3')].rawValue</BEN_source_key>
+			</rules>
+		</tag>
+
+		<tag name='receipt_header_line_4'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.physicalAddress.city</BEN_source_key>
+				<separate_with>, </separate_with>
+				<order>0</order>
+			</rules>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.physicalAddress.state</BEN_source_key>
+				<separate_with>, </separate_with>
+				<order>1</order>
+			</rules>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.physicalAddress.postalCode</BEN_source_key>
+				<separate_with></separate_with>
+				<order>2</order>
+			</rules>
+		</tag>
+
+		<tag name='default_admin_password'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.physicalAddress.state</BEN_source_key>
+				<separate_with></separate_with>
+				<order>0</order>
+			</rules>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.physicalAddress.postalCode</BEN_source_key>
+				<separate_with></separate_with>
+				<order>1</order>
+			</rules>
+		</tag>
+
+		<tag name='receipt_header_line_3'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.physicalAddress.addressLine1</BEN_source_key>
+				<separate_with> </separate_with>
+				<order>0</order>
+			</rules>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].business.physicalAddress.addressLine2</BEN_source_key>
+				<separate_with></separate_with>
+				<order>1</order>
+			</rules>
+		</tag>
+
+		<tag name='MerchantAcquirerConfig.1.receipt_header_line_1'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].hierarchy.merchantName</BEN_source_key>
+				<start>0</start>
+				<max>99</max>
+			</rules>
+		</tag>
+
+		<tag name='MerchantAcquirerConfig.1.receipt_header_line_2' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].hierarchy.merchantName</BEN_source_key>
+				<start>99</start>
+				<max>99</max>
+			</rules>
+		</tag>
+
+		<tag name='void_pw_level' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name=='Password Protect Void')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>SUPERVISOR</converted_value>
+					</arr>
+					<other>OPEN</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='ebt_type' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Password Protect Credit')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>SUPERVISOR</converted_value>
+					</arr>
+					<other>OPEN</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='refund_pw_level' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].terminalProductCategory.ebt</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>true</expected_value>
+						<converted_value>EBT_FOOD_CASH</converted_value>
+					</arr>
+					<other>OFF</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='settlement_pw_level' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Password Protect Batch')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>SUPERVISOR</converted_value>
+					</arr>
+					<other>OPEN</other>
+				</condition>
+			</rules>
+		</tag>
+		<tag name='cashback_enable' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Cash Back')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>true</converted_value>
+					</arr>
+					<other>false</other>
+				</condition>
+			</rules>
+		</tag>
+		<tag name='cashback_discover_enable' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Cash Back')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>true</converted_value>
+					</arr>
+					<other>false</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='cashback_ebt_enable' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Cash Back')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>true</converted_value>
+					</arr>
+					<other>false</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='card_present' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Card Present Prompting')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>true</converted_value>
+					</arr>
+					<other>false</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='force_pw_level' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Ingenico Offline Password')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>SUPERVISOR</converted_value>
+					</arr>
+					<other>OPEN</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='report_pw_level' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Ingenico Reports Password')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>SUPERVISOR</converted_value>
+					</arr>
+					<other>OPEN</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='invoice_type' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Invoice Prompt')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>INV_PROMPT_INVOICE</converted_value>
+					</arr>
+					<other>INV_PROMPT_OFF</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='last_4_digits_enabled' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Ingenico Fraud Control')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>N</expected_value>
+						<converted_value>false</converted_value>
+					</arr>
+					<other>true</other>
+				</condition>
+			</rules>
+		</tag>
+		<tag name='clerk_id_support' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Server Clerk')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>ID</converted_value>
+					</arr>
+					<other>OFF</other>
+				</condition>
+			</rules>
+		</tag>
+		<tag name='receipt_print' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Ingenico Customer Receipt Option')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>C</expected_value>
+						<converted_value>PROMPT</converted_value>
+					</arr>
+					<other>OFF</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='auto_settle_type' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName == 'AUTO_CLOSE_TN')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>T</expected_value>
+						<converted_value>AUTO_SETTLE</converted_value>
+					</arr>
+					<other>NONE</other>
+				</condition>
+			</rules>
+		</tag>
+		<tag name='tip_processing_mode' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName == 'ING_RETAIL_TIP')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>PRINTED_ONLY</converted_value>
+					</arr>
+					<other>DISABLE</other>
+				</condition>
+			</rules>
+		</tag>
+		<tag name='enable_gratuity_percentage' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName == 'TIP_GUIDE')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>true</converted_value>
+					</arr>
+					<other>false</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='partial_auth_enable' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name == 'Allow Partial Approval')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>Y</expected_value>
+						<converted_value>true</converted_value>
+					</arr>
+					<other>false</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='settlement_report_type'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.name=='Ingenico Settlement Report Option')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>S</expected_value>
+						<converted_value>SUMMARY</converted_value>
+					</arr>
+					<arr json:Array='true'>
+						<expected_value>B</expected_value>
+						<converted_value>DETAIL</converted_value>
+					</arr>
+					<other>OFF</other>
+				</condition>
+			</rules>
+		</tag>
+		<tag name='tip_processing_mode'>
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName == 'TIP_PROCESSING')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>P</expected_value>
+						<converted_value>PROMPTED_PRINTED</converted_value>
+					</arr>
+					<arr json:Array='true'>
+						<expected_value>N</expected_value>
+						<converted_value>PRINTED_ONLY</converted_value>
+					</arr>
+					<other>DISABLE</other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='MerchantAcquirerConfig.1.acq_terminal_id' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].terminalNumber</BEN_source_key>
+				<start_with>000</start_with>
+			</rules>
+		</tag>
+
+		<tag name='HostCfg.1.bank_id' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].bankId</BEN_source_key>
+				<start_with>0000</start_with>
+			</rules>
+		</tag>
+
+		<tag name='MerchantAcquirerConfig.1.acq_merchant_id' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].hostMerchantNumber</BEN_source_key>
+				<start_with>000000000000</start_with>
+			</rules>
+		</tag>
+
+		<tag name='current_service_idx' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].environment.code</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<key>data.equipmentData[0].terminals[0].environment.description</key>
+						<expected_value>moto</expected_value>
+						<converted_value>1</converted_value>
+					</arr>
+					<arr json:Array='true'>
+						<key>data.equipmentData[0].terminals[0].environment.description</key>
+						<expected_value>quick service rest</expected_value>
+						<converted_value>1</converted_value>
+					</arr>
+					<BEN_key_data_type>int</BEN_key_data_type>
+					<value_pickup_from_key>true</value_pickup_from_key>
+					<operation>+</operation>
+					<value>1</value>
+					<other></other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='Host0|ComOrderPreference' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName=='ENABLE_DIAL_PRIMARY_COMM_ING')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<key>data.equipmentData[0].terminals[0].terminalType.description</key>
+						<contains_value>4G</contains_value>
+						<converted_value>3</converted_value>
+					</arr>
+					<arr json:Array='true'>
+						<key>data.equipmentData[0].terminals[0].terminalType.description</key>
+						<contains_value>BT</contains_value>
+						<converted_value>2</converted_value>
+					</arr>
+					<arr json:Array='true'>
+						<key>data.equipmentData[0].terminals[0].terminalType.description</key>
+						<contains_value>WIFI</contains_value>
+						<condition>
+							<arr json:Array='true'>
+								<key>data.equipmentData[0].terminals[0].terminalType.description</key>
+								<contains_value>DESK</contains_value>
+								<condition>
+									<arr json:Array='true'>
+										<key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName=='ENABLE_DIAL_PRIMARY_COMM_ING')].rawValue</key>
+										<expected_value>Y</expected_value>
+										<converted_value>12</converted_value>
+									</arr>
+									<arr json:Array='true'>
+										<key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName=='ENABLE_DIAL_PRIMARY_COMM_ING')].rawValue</key>
+										<expected_value>N</expected_value>
+										<converted_value>42</converted_value>
+									</arr>
+								</condition>
+							</arr>
+							<other>4</other>
+						</condition>
+					</arr>
+					<arr json:Array='true'>
+						<key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName=='ENABLE_DIAL_PRIMARY_COMM_ING')].rawValue</key>
+						<expected_value>Y</expected_value>
+						<converted_value>1</converted_value>
+					</arr>
+					<other></other>
+				</condition>
+			</rules>
+		</tag>
+
+		<tag name='daily_time_auto_settle' >
+			<rules json:Array='true'>
+				<BEN_source_key>data.equipmentData[0].terminals[0].customizationDetail[?(@.internalName== 'AUTO_CLOS_TIME')].rawValue</BEN_source_key>
+				<condition>
+					<arr json:Array='true'>
+						<expected_value>0000</expected_value>
+						<converted_value>23:59</converted_value>
+					</arr>
+					<value_pickup_from_key>true</value_pickup_from_key>
+				</condition>
+				<first>2</first>
+				<second>2</second>
+				<separate_with>:</separate_with>
+			</rules>
+		</tag>
+	</template>
+</application>

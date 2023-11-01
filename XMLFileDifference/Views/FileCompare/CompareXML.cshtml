@@ -1,8 +1,4 @@
-﻿<!--@{
-    ViewBag.Title = "XML Difference";
-}
-
-<h2>XML Difference</h2>
+﻿<h2>XML Difference</h2>
 
 @if (ViewBag.AreEqual)
 {
@@ -10,8 +6,5 @@
 }
 else
 {
-
-    <a href="path_to_output.html" target="_blank">View XML Difference</a>-->
-    @*<p>The XML files have differences:</p>
-    <textarea rows="10" cols="50" readonly>@ViewBag.Diffgram</textarea>*@
-<!--}-->
+    <textarea rows="70" cols="150" readonly>@ViewBag.Diffgram</textarea>
+}

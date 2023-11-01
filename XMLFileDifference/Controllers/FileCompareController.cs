@@ -2,16 +2,13 @@
 using DiffPlex.DiffBuilder;
 using DiffPlex.DiffBuilder.Model;
 using Microsoft.XmlDiffPatch;
-using System.Text;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Web.Mvc;
 using System.Xml;
 using System.Xml.Linq;
 using XMLFileDifference.Models;
-using System.Collections.Generic;
-using FSharp.Compiler;
-using System.Web.UI.WebControls;
-using System.Linq;
 
 namespace XMLFileDifference.Controllers
 {
@@ -27,9 +24,12 @@ namespace XMLFileDifference.Controllers
                                          XmlDiffOptions.IgnoreNamespaces |
                                          XmlDiffOptions.IgnorePrefixes);
 
-            XmlWriter diffGramWriter = XmlWriter.Create(OUTPUT_XML);
-            bool areEqual = xmldiff.Compare(filePath1, filePath2, false, diffGramWriter);
-            diffGramWriter.Close();
+            bool areEqual = true;
+            StringBuilder xmlDiffResult = new StringBuilder();
+            using (XmlWriter diffGramWriter = XmlWriter.Create(xmlDiffResult))
+            {
+                areEqual = xmldiff.Compare(filePath1, filePath2, false, diffGramWriter);
+            }
 
             if (areEqual)
             {
@@ -40,10 +40,19 @@ namespace XMLFileDifference.Controllers
             {
                 ViewBag.AreEqual = areEqual;
                 ViewBag.DiffResult = "The XML files have differences:";
-                ViewBag.Diffgram = xmldiff;
+                XDocument xDocument = XDocument.Parse(xmlDiffResult.ToString());
+                string formattedXml = xDocument.ToString();
+                XmlTextWriter output = new XmlTextWriter(OUTPUT_XML, Encoding.Unicode);
+                xDocument.Save(output);
+                output.Close();
+                ViewBag.Diffgram = formattedXml;
+                //ViewBag.Diffgram = xmlDiffResult.ToString();
             }
             return View();
         }
+
+
+
 
 
         private SideBySideDiffModel Compare(XmlDocument doc1, XmlDocument doc2)
